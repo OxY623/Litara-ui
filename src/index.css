@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "./typography.css";
 
+* {
+  border: 1px rebeccapurple solid;
+}
 
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

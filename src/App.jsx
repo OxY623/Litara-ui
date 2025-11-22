@@ -1,11 +1,10 @@
-import "./App.css";
-import NotesApp from "./components/NotesApp";
-import Sparkle from "./components/Sparkle";
+import './App.css';
+import Pages from './pages';
 
 function App() {
   return (
     <div className="min-h-screen">
-      <Sparkle />
+      <Pages />
     </div>
   );
 }

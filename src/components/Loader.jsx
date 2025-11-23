@@ -1,5 +1,3 @@
-import React from "react";
-
 function Loader() {
   return (
     <div className="min-h-screen bg-linear-to-br from-red-50 via-white to-green-50 flex items-center justify-center">

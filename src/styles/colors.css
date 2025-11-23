@@ -1,11 +1,18 @@
 :root {
     /* Brand */
-    --color-primary: #116ACC;
-    --color-primary-hover: #0552ad;
+    --color-primary: #FF7F11;
+    /* оранжевый для логотипа */
+    --color-primary-hover: #E66900;
+    /* чуть темнее при наведении */
     --color-secondary-1: #182233;
+    /* темный фон, контрастный */
     --color-secondary-2: #B3CEE2;
+    /* светлый акцент */
     --color-secondary-3: #D9DDE7;
+    /* дополнительные светлые элементы */
     --color-secondary-4: #FD4E5D;
+    /* красный для уведомлений/важного */
+
 
     /* Gray */
     --gray-0: #F2F6FD;

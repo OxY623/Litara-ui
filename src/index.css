@@ -37,12 +37,12 @@ body {
 
 a:link,
 a:visited {
-  color: #0077cc;
+  color: var(--color-primary);
 }
 
 a:hover,
 a:focus {
-  color: #004499;
+  color: var(--color-primary-hover);
 }
 
 code,

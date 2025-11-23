@@ -24,16 +24,16 @@ const GET_NOTES = gql`
 `;
 
 const Home = () => {
-  const { data, loading, error, fetchMore } = useQuery(GET_NOTES);
+  const { data, loading, error, fetchMore } = useQuery(GET_NOTES, {
+    variables: { cursor: '' },
+    fetchPolicy: 'network-only', // игнорируем старый кеш
+  });
 
   if (loading) return <Loader />;
-  if (error)
-    return (
-      <p>
-        {console.log(error)}
-        {error.message}
-      </p>
-    );
+  if (error) {
+    console.log(error);
+    return <p>{error.message}</p>;
+  }
 
   return (
     <div>

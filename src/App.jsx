@@ -3,7 +3,7 @@ import Pages from './pages';
 
 function App() {
   return (
-    <div className="min-h-screen">
+    <div className="">
       <Pages />
     </div>
   );

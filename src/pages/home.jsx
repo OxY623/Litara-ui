@@ -24,15 +24,12 @@ const GET_NOTES = gql`
 `;
 
 const Home = () => {
-  const { data, loading, error, fetchMore } = useQuery(GET_NOTES, {
-    variables: { cursor: '' },
-    fetchPolicy: 'network-only', // игнорируем старый кеш
-  });
+  const { data, loading, error, fetchMore } = useQuery(GET_NOTES);
 
   if (loading) return <Loader />;
   if (error) {
     console.log(error);
-    return <p>{error.message}</p>;
+    return <p className="text-red-600">{error.message}</p>;
   }
 
   return (
@@ -40,6 +37,7 @@ const Home = () => {
       <h1>Notedly</h1>
       {data.noteFeed.notes.map((note) => (
         <div key={note.id} className="note-card">
+          <img src={note.author.avatar} className="size-6"></img>
           <p>
             <strong>{note.author.username}</strong>:
           </p>

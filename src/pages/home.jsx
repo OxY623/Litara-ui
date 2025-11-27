@@ -1,7 +1,8 @@
-import Loader from '../components/Loader';
-import { Button } from '../components/Button';
 import { gql } from '@apollo/client';
 import { useQuery } from '@apollo/client/react';
+import { Button } from '../components/Button';
+import Loader from '../components/Loader';
+import NoteFeed from '../components/NoteFeed';
 
 const GET_NOTES = gql`
   query NoteFeed($cursor: String) {
@@ -34,27 +35,32 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Notedly</h1>
-      {data.noteFeed.notes.map((note) => (
-        <div key={note.id} className="note-card">
-          <img src={note.author.avatar} className="size-6"></img>
-          <p>
-            <strong>{note.author.username}</strong>:
-          </p>
-          <p>{note.content}</p>
-          <p>❤️ {note.favoriteCount}</p>
-        </div>
-      ))}
+      <h1>All Notes</h1>
+      <br></br>
+      <NoteFeed data_notes={data.noteFeed.notes} />
       {data.noteFeed.hasNextPage && (
         <Button
-          onClick={() =>
+          name="Load more"
+          handleClick={() =>
             fetchMore({
               variables: { cursor: data.noteFeed.cursor },
+              updateQuery: (prev, { fetchMoreResult }) => {
+                if (!fetchMoreResult) return prev;
+
+                const newFeed = fetchMoreResult.noteFeed;
+
+                return {
+                  noteFeed: {
+                    cursor: newFeed.cursor,
+                    hasNextPage: newFeed.hasNextPage,
+                    notes: [...prev.noteFeed.notes, ...newFeed.notes],
+                    __typename: prev.noteFeed.__typename,
+                  },
+                };
+              },
             })
           }
-        >
-          Load more
-        </Button>
+        ></Button>
       )}
     </div>
   );

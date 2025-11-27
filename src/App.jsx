@@ -1,12 +1,23 @@
+import { createContext, useState } from 'react';
 import './App.css';
 import Pages from './pages';
 
+const ButtonShowDonationContext = createContext([true, () => {}]);
+
 function App() {
+  const [showDonation, setShowDonation] = useState(true);
+
+  const handleClickShowDonation = (value) => {
+    setShowDonation(value);
+  };
   return (
-    <div className="">
+    <ButtonShowDonationContext.Provider
+      value={[showDonation, handleClickShowDonation]}
+    >
       <Pages />
-    </div>
+    </ButtonShowDonationContext.Provider>
   );
 }
 
 export default App;
+export { ButtonShowDonationContext };

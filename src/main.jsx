@@ -1,17 +1,26 @@
-import { StrictMode } from 'react';
+import { ApolloProvider } from '@apollo/client/react';
+import { StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
-import './index.css';
+import { ErrorBoundary } from 'react-error-boundary';
 import App from './App.jsx';
 import client from './apollo.js';
-import { ApolloProvider } from '@apollo/client/react';
-import { ErrorBoundary } from 'react-error-boundary';
+import Loader from './components/Loader.jsx';
+import './index.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ErrorBoundary fallback={<p>Something went wrong</p>}>
+    <Suspense
+      fallback={
+        <>
+          <Loader />
+        </>
+      }
+    >
       <ApolloProvider client={client}>
-        <App className="selection:bg-pink-300" />
+        <ErrorBoundary fallback={<p>Something went wrong</p>}>
+          <App className="selection:bg-pink-300" />
+        </ErrorBoundary>
       </ApolloProvider>
-    </ErrorBoundary>
+    </Suspense>
   </StrictMode>,
 );

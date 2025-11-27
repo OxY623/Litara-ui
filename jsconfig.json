@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "target": "ES6"
+    // "checkJs": true
+  },
+  //   "js/ts.implicitProjectConfig.checkJs": true,
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/node_modules/*"]
+}

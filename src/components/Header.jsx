@@ -3,9 +3,9 @@ import { AppBar, Box, Button, Link, Toolbar, Typography } from '@mui/material';
 import { Heart } from 'lucide-react';
 import { useContext } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router';
-import { IS_LOGGED_IN } from '../apollo.js';
 import { ButtonShowDonationContext } from '../App';
 import logo from '../assets/logo.png';
+import { IS_LOGGED_IN } from '../qql/query';
 
 function Header() {
   const [_, handleClickShowDonation] = useContext(ButtonShowDonationContext);

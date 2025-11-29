@@ -1,24 +1,8 @@
-import { gql } from '@apollo/client';
 import { useQuery } from '@apollo/client/react';
 import { useParams } from 'react-router';
 import Loader from '../components/Loader';
 import Note from '../components/Note';
-
-const GET_NOTE = gql`
-  query note($id: ID!) {
-    note(id: $id) {
-      id
-      createdAt
-      content
-      favoriteCount
-      author {
-        username
-        id
-        avatar
-      }
-    }
-  }
-`;
+import { GET_NOTE } from '../qql/query';
 
 function NotePage() {
   // Сохраняем id из url в виде переменной

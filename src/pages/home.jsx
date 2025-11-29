@@ -1,27 +1,7 @@
-import { gql } from '@apollo/client';
 import { useQuery } from '@apollo/client/react';
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import NoteFeed from '../components/NoteFeed';
-
-const GET_NOTES = gql`
-  query NoteFeed($cursor: String) {
-    noteFeed(cursor: $cursor) {
-      cursor
-      hasNextPage
-      notes {
-        id
-        createdAt
-        content
-        favoriteCount
-        author {
-          username
-          id
-          avatar
-        }
-      }
-    }
-  }
-`;
+import { GET_NOTES } from '../qql/query';
 
 const Home = () => {
   const { data, loading, error, fetchMore } = useQuery(GET_NOTES);

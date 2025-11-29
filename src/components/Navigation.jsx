@@ -6,7 +6,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
-import { BookHeart, Home, Notebook } from 'lucide-react';
+import { BookHeart, Home, Notebook, PlusIcon } from 'lucide-react';
 import { NavLink } from 'react-router';
 
 const Navigation = ({ statusSidebar }) => {
@@ -26,6 +26,23 @@ const Navigation = ({ statusSidebar }) => {
             </ListItemIcon>
             {statusSidebar && (
               <ListItemText primary="Home" sx={{ whiteSpace: 'nowrap' }} />
+            )}
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem disablePadding>
+          <ListItemButton
+            component={NavLink}
+            to="/new"
+            sx={{
+              '&.active': { color: 'orange' },
+            }}
+          >
+            <ListItemIcon>
+              <PlusIcon />
+            </ListItemIcon>
+            {statusSidebar && (
+              <ListItemText primary="New" sx={{ whiteSpace: 'nowrap' }} />
             )}
           </ListItemButton>
         </ListItem>

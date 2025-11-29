@@ -1,11 +1,4 @@
-import { ApolloClient, HttpLink, InMemoryCache, gql } from '@apollo/client';
-
-// локальный query
-export const IS_LOGGED_IN = gql`
-  query IsLoggedIn {
-    isLoggedIn @client
-  }
-`;
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 
 // кеш с typePolicies для локального поля
 const cache = new InMemoryCache({
@@ -27,6 +20,9 @@ const httpLink = new HttpLink({
   uri: import.meta.env.VITE_API_URL || 'http://localhost:4000/api',
   headers: {
     'Content-Type': 'application/json',
+    Authorization: localStorage.getItem('token')
+      ? `${localStorage.getItem('token')}`
+      : '',
   },
 });
 

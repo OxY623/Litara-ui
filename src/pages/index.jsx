@@ -4,15 +4,16 @@ import { Loader } from 'lucide-react';
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router';
 import { RouterProvider } from 'react-router/dom';
-import { IS_LOGGED_IN } from '../apollo.js';
 import Layout from '../components/Layout';
+import { IS_LOGGED_IN } from '../qql/query';
 const NotePage = lazy(() => import('./notes'));
 const Home = lazy(() => import('./home'));
 const MyNotes = lazy(() => import('./mynotes'));
 const Favorites = lazy(() => import('./favorites'));
 const SignUp = lazy(() => import('./signup'));
 const SignIn = lazy(() => import('./signin'));
-
+const NewNote = lazy(() => import('./new'));
+const EditNote = lazy(() => import('./edit'));
 export const PrivateRoute = ({ children }) => {
   const { data, loading, error } = useQuery(IS_LOGGED_IN);
 
@@ -45,6 +46,14 @@ const router = createBrowserRouter([
       { path: '/signup', element: <SignUp /> },
       { path: '/signin', element: <SignIn /> },
       {
+        path: '/new',
+        element: (
+          <PrivateRoute>
+            <NewNote />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: '/my_notes',
         element: (
           <PrivateRoute>
@@ -57,6 +66,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Favorites />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/edit/:id',
+        element: (
+          <PrivateRoute>
+            <EditNote />
           </PrivateRoute>
         ),
       },

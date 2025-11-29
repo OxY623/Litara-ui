@@ -4,7 +4,7 @@ import { Box, CircularProgress, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import NoteForm from '../components/NoteForm';
-import { GET_MY_NOTES, GET_NOTES } from '../qql/query';
+import { GET_MY_NOTES, GET_NOTES } from '../gql/query';
 
 const NEW_NOTE = gql`
   mutation NewNote($content: String!) {

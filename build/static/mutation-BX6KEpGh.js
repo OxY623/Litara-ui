@@ -1,5 +1,4 @@
-import { gql } from '@apollo/client';
-const EDIT_NOTE = gql`
+import{M as t}from"./index-BnhGmwnk.js";const e=t`
   mutation updateNote($id: ID!, $content: String!) {
     updateNote(id: $id, content: $content) {
       id
@@ -16,14 +15,15 @@ const EDIT_NOTE = gql`
       }
     }
   }
-`;
-const TOGGLE_FAVORITE = gql`
-  mutation ToggleFavorite($id: ID!) {
+`,o=t`
+  mutation deleteNote($id: ID!) {
+    deleteNote(id: $id)
+  }
+`,i=t`
+  mutation toggleFavorite($id: ID!) {
     toggleFavorite(id: $id) {
       id
       favoriteCount
     }
   }
-`;
-
-export { EDIT_NOTE, TOGGLE_FAVORITE };
+`;export{o as D,e as E,i as T};

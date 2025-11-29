@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client/react';
 import { useParams } from 'react-router';
 import Loader from '../components/Loader';
 import Note from '../components/Note';
-import { GET_NOTE } from '../qql/query';
+import { GET_NOTE } from '../gql/query';
 
 function NotePage() {
   // Сохраняем id из url в виде переменной

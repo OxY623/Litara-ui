@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client/react';
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import NoteFeed from '../components/NoteFeed';
-import { GET_NOTES } from '../qql/query';
+import { GET_NOTES } from '../gql/query';
 
 const Home = () => {
   const { data, loading, error, fetchMore } = useQuery(GET_NOTES);

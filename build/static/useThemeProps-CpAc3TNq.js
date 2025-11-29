@@ -1,0 +1,1 @@
+import{R as e,S as n,U as o}from"./index-BnhGmwnk.js";const t=e();function s({props:e,name:t,defaultTheme:s,themeId:p}){let m=o(s);return p&&(m=m[p]||m),function(e){const{theme:o,name:t,props:s}=e;return o&&o.components&&o.components[t]&&o.components[t].defaultProps?n(o.components[t].defaultProps,s):s}({theme:m,name:t,props:e})}export{t as s,s as u};

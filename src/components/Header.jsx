@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router';
 import { ButtonShowDonationContext } from '../App';
 import logo from '../assets/logo.png';
-import { IS_LOGGED_IN } from '../qql/query';
+import { IS_LOGGED_IN } from '../gql/query';
 
 function Header() {
   const [_, handleClickShowDonation] = useContext(ButtonShowDonationContext);

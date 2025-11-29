@@ -5,7 +5,7 @@ import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router';
 import { RouterProvider } from 'react-router/dom';
 import Layout from '../components/Layout';
-import { IS_LOGGED_IN } from '../qql/query';
+import { IS_LOGGED_IN } from '../gql/query';
 const NotePage = lazy(() => import('./notes'));
 const Home = lazy(() => import('./home'));
 const MyNotes = lazy(() => import('./mynotes'));
@@ -62,10 +62,26 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: '/my_notes/note/:id',
+        element: (
+          <PrivateRoute>
+            <NotePage />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: '/favorites',
         element: (
           <PrivateRoute>
             <Favorites />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/favorites/note/:id',
+        element: (
+          <PrivateRoute>
+            <NotePage />
           </PrivateRoute>
         ),
       },

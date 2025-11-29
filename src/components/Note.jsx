@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { format } from 'date-fns';
 import Markdown from 'react-markdown';
-import { IS_LOGGED_IN } from '../qql/query';
+import { IS_LOGGED_IN } from '../gql/query';
 import NoteUser from './NoteUser';
 
 function Note({ note }) {
@@ -32,6 +32,9 @@ function Note({ note }) {
       </Typography>
     );
   }
+
+  console.log('IS_LOGGED_IN data:', data);
+  console.log('note.favoriteCount:', note.favoriteCount);
 
   const formattedDate = format(new Date(note.createdAt), 'MMM do yyyy');
 
@@ -63,8 +66,11 @@ function Note({ note }) {
         <Box mb={2}>
           <Markdown>{note.content}</Markdown>
         </Box>
-        {data.isLoggedIn ? <NoteUser note={note} /> : null}
-        <Typography variant="body2">❤️ {note.favoriteCount}</Typography>
+        {data?.isLoggedIn ? (
+          <NoteUser note={note} />
+        ) : (
+          <Typography variant="body2">❤️ {note.favoriteCount}</Typography>
+        )}
       </CardContent>
     </Card>
   );

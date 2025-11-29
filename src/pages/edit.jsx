@@ -1,9 +1,10 @@
 import { useMutation, useQuery } from '@apollo/client/react';
+import { Box, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router';
 import Loader from '../components/Loader';
 import NoteForm from '../components/NoteForm';
-import { EDIT_NOTE } from '../qql/mutation';
-import { GET_ME, GET_NOTE } from '../qql/query';
+import { EDIT_NOTE } from '../gql/mutation';
+import { GET_ME, GET_NOTE } from '../gql/query';
 
 function EditNote() {
   // Сохраняем id из url в виде переменной
@@ -35,7 +36,14 @@ function EditNote() {
       </p>
     );
   }
-  return <NoteForm content={data.note.content} action={editNote} />;
+  return (
+    <Box p={3}>
+      <Typography variant="h4" gutterBottom className="text-amber-500">
+        Edit Note
+      </Typography>
+      <NoteForm content={data.note.content} action={editNote} />
+    </Box>
+  );
 }
 
 export default EditNote;

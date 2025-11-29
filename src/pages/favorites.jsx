@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client/react';
 import { Box, CircularProgress, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import NoteFeed from '../components/NoteFeed';
-import { GET_MY_FAVORITES } from '../qql/query';
+import { GET_MY_FAVORITES } from '../gql/query';
 
 const Favorites = () => {
   const { data, loading, error } = useQuery(GET_MY_FAVORITES);

@@ -1,17 +1,25 @@
-import { Link } from 'react-router';
+import { Box, Link, Stack } from '@mui/material';
+import { Link as RouterLink } from 'react-router';
 import Note from './Note';
 
-function NoteFeed(props) {
-  const { data_notes } = props;
-  const components = data_notes.map((note) => (
-    <div key={note.id}>
-      <Link to={`note/${note.id}`}>
-        <Note key={note.id} note={note} />
-      </Link>
-    </div>
-  ));
-
-  return <div className="p-2.5 flex flex-col gap-2.5">{components}</div>;
+function NoteFeed({ data_notes }) {
+  return (
+    <Box sx={{ p: 2.5 }}>
+      <Stack spacing={2.5}>
+        {data_notes.map((note) => (
+          <Link
+            key={note.id}
+            component={RouterLink}
+            to={`note/${note.id}`}
+            underline="none"
+            sx={{ display: 'block' }}
+          >
+            <Note note={note} />
+          </Link>
+        ))}
+      </Stack>
+    </Box>
+  );
 }
 
 export default NoteFeed;

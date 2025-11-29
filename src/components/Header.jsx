@@ -1,31 +1,99 @@
+import { useQuery } from '@apollo/client/react';
+import { AppBar, Box, Button, Link, Toolbar, Typography } from '@mui/material';
 import { Heart } from 'lucide-react';
 import { useContext } from 'react';
+import { Link as RouterLink, useNavigate } from 'react-router';
+import { IS_LOGGED_IN } from '../apollo.js';
 import { ButtonShowDonationContext } from '../App';
 import logo from '../assets/logo.png';
 
 function Header() {
   const [_, handleClickShowDonation] = useContext(ButtonShowDonationContext);
-  return (
-    <header className="bg-white w-full px-7 py-2 flex  h-16 fixed top-0 left-0 items-center shadow-2xl z-10 justify-between">
-      <div className="flex gap-x-2 items-center">
-        <img
-          src={logo}
-          alt='Logo "OranNote"'
-          className="size-12 rounded-full"
-        />
-        <h1 className="m-0 p-0 inline font-bold">
-          <span className="text-orange-600">Oran</span>Note
-        </h1>
-      </div>
+  const { data, client } = useQuery(IS_LOGGED_IN);
+  const navigate = useNavigate();
 
-      <button
-        onClick={() => handleClickShowDonation(true)}
-        className="flex items-center gap-2 bg-orange-600 text-white font-bold px-4 py-2 rounded-lg border-3 border-gray-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+  return (
+    <AppBar
+      position="fixed"
+      color="default"
+      elevation={4}
+      sx={{
+        height: 64,
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexDirection: 'row',
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+      }}
+    >
+      <Toolbar
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '100%',
+          alignItems: 'center',
+        }}
       >
-        <Heart className="w-4 h-4" />
-        <span className="hidden sm:inline">Support</span>
-      </button>
-    </header>
+        {/* Логотип и название */}
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+          <Box
+            component="img"
+            src={logo}
+            alt='Logo "OranNote"'
+            sx={{ width: 48, height: 48, borderRadius: '50%' }}
+          />
+          <Typography variant="h6" fontWeight="bold" sx={{ m: 0, p: 0 }}>
+            <Box component="span" sx={{ color: 'orange' }}>
+              Oran
+            </Box>
+            Note
+          </Typography>
+        </Box>
+
+        <Box display={'flex'} alignItems="center" gap={2}>
+          {/* Авторизация */}
+          {data?.isLoggedIn ? (
+            <Button
+              variant="outlined"
+              color="inherit"
+              onClick={() => {
+                localStorage.removeItem('token');
+                navigate('/');
+              }}
+            >
+              Log out!!
+            </Button>
+          ) : (
+            <Typography variant="body2" sx={{ m: 0, p: 0 }}>
+              <Link component={RouterLink} to="/signin" underline="hover">
+                Sign In
+              </Link>{' '}
+              OR{' '}
+              <Link component={RouterLink} to="/signup" underline="hover">
+                Sign Up
+              </Link>
+            </Typography>
+          )}
+
+          {/* Кнопка поддержки */}
+          <Button
+            variant="contained"
+            color="inherit"
+            sx={{ bgcolor: 'orange' }}
+            onClick={() => handleClickShowDonation(true)}
+          >
+            <Heart size={18} />
+            <Typography
+              variant="body2"
+              sx={{ ml: 1, display: { xs: 'none', sm: 'inline' } }}
+            >
+              Support
+            </Typography>
+          </Button>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 }
 

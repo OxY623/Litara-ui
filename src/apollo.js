@@ -1,5 +1,28 @@
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloClient, HttpLink, InMemoryCache, gql } from '@apollo/client';
 
+// локальный query
+export const IS_LOGGED_IN = gql`
+  query IsLoggedIn {
+    isLoggedIn @client
+  }
+`;
+
+// кеш с typePolicies для локального поля
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        isLoggedIn: {
+          read() {
+            return !!localStorage.getItem('token');
+          },
+        },
+      },
+    },
+  },
+});
+
+// link с динамическим токеном
 const httpLink = new HttpLink({
   uri: import.meta.env.VITE_API_URL || 'http://localhost:4000/api',
   headers: {
@@ -9,8 +32,8 @@ const httpLink = new HttpLink({
 
 const client = new ApolloClient({
   link: httpLink,
-  cache: new InMemoryCache(),
+  cache,
   connectToDevTools: true,
 });
-console.log('Created ApolloClient:', client);
+
 export default client;

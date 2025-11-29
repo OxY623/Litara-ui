@@ -1,7 +1,6 @@
 import { gql } from '@apollo/client';
 import { useQuery } from '@apollo/client/react';
-import { Button } from '../components/Button';
-import Loader from '../components/Loader';
+import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import NoteFeed from '../components/NoteFeed';
 
 const GET_NOTES = gql`
@@ -27,42 +26,62 @@ const GET_NOTES = gql`
 const Home = () => {
   const { data, loading, error, fetchMore } = useQuery(GET_NOTES);
 
-  if (loading) return <Loader />;
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" mt={4}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   if (error) {
     console.log(error);
-    return <p className="text-red-600">{error.message}</p>;
+    return (
+      <Typography color="error" variant="body1">
+        {error.message}
+      </Typography>
+    );
   }
 
   return (
-    <div>
-      <h1>All Notes</h1>
-      <br></br>
+    <Box p={3}>
+      <Typography variant="h4" gutterBottom className="text-amber-500">
+        All Notes
+      </Typography>
+
       <NoteFeed data_notes={data.noteFeed.notes} />
+
       {data.noteFeed.hasNextPage && (
-        <Button
-          name="Load more"
-          handleClick={() =>
-            fetchMore({
-              variables: { cursor: data.noteFeed.cursor },
-              updateQuery: (prev, { fetchMoreResult }) => {
-                if (!fetchMoreResult) return prev;
+        <Box mt={3} display="flex" justifyContent="center">
+          <Button
+            variant="contained"
+            color="primary"
+            className="bg-amber-500 hover:bg-amber-600 text-black"
+            onClick={() =>
+              fetchMore({
+                variables: { cursor: data.noteFeed.cursor },
+                updateQuery: (prev, { fetchMoreResult }) => {
+                  if (!fetchMoreResult) return prev;
 
-                const newFeed = fetchMoreResult.noteFeed;
+                  const newFeed = fetchMoreResult.noteFeed;
 
-                return {
-                  noteFeed: {
-                    cursor: newFeed.cursor,
-                    hasNextPage: newFeed.hasNextPage,
-                    notes: [...prev.noteFeed.notes, ...newFeed.notes],
-                    __typename: prev.noteFeed.__typename,
-                  },
-                };
-              },
-            })
-          }
-        ></Button>
+                  return {
+                    noteFeed: {
+                      cursor: newFeed.cursor,
+                      hasNextPage: newFeed.hasNextPage,
+                      notes: [...prev.noteFeed.notes, ...newFeed.notes],
+                      __typename: prev.noteFeed.__typename,
+                    },
+                  };
+                },
+              })
+            }
+          >
+            Load more
+          </Button>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 };
 

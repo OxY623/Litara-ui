@@ -1,17 +1,17 @@
-@import "tailwindcss";
+@layer theme, base, mui, components, utilities;
+@import 'tailwindcss';
 @import './styles/colors.css';
-@import "./styles/typography.css";
+@import './styles/typography.css';
 
 @layer base {
-
   button:not(:disabled),
-  [role="button"]:not(:disabled) {
+  [role='button']:not(:disabled) {
     cursor: pointer;
   }
 }
 
 @property --warning-color {
-  syntax: "<color>";
+  syntax: '<color>';
   inherits: false;
   initial-value: #f70202;
 }
@@ -29,8 +29,9 @@ html {
 }
 
 body {
-  font-family: -apple-system, Ubuntu, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Oxygen-Sans, Cantarell, 'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, Ubuntu, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans,
+    Cantarell, 'Helvetica Neue', sans-serif;
   background-color: #fff;
   line-height: 1.4;
 }

@@ -1,8 +1,15 @@
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Snackbar,
+  Typography,
+} from '@mui/material';
 import { useState } from 'react';
 
 export default function DonationTon() {
   const wallet = 'UQBKH60IlUIGBd6Fd4-JYQ5YmYh9pYXJ90kz6HC3uNMoSb6F';
-
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = async () => {
@@ -12,21 +19,55 @@ export default function DonationTon() {
   };
 
   return (
-    <div className="p-4 bg-white shadow-lg rounded-2xl border border-gray-200 max-w-sm">
-      <h2 className="text-lg font-semibold">Support via TON</h2>
+    <Card
+      sx={{
+        borderRadius: 3,
+        boxShadow: 3,
+        border: '1px solid',
+        borderColor: 'grey.300',
+      }}
+    >
+      <CardContent>
+        <Typography variant="h6" fontWeight="bold">
+          Support via TON
+        </Typography>
 
-      <p className="mt-3 text-sm text-gray-700">Send your donation to:</p>
+        <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
+          Send your donation to:
+        </Typography>
 
-      <p className="mt-2 font-mono text-xs break-all bg-gray-100 p-2 rounded-lg border border-gray-300">
-        {wallet}
-      </p>
+        <Box
+          sx={{
+            mt: 2,
+            fontFamily: 'monospace',
+            fontSize: '0.8rem',
+            wordBreak: 'break-all',
+            bgcolor: 'grey.100',
+            p: 2,
+            borderRadius: 2,
+            border: '1px solid',
+            borderColor: 'grey.300',
+          }}
+        >
+          {wallet}
+        </Box>
 
-      <button
-        onClick={copyToClipboard}
-        className="mt-3 w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition active:scale-95"
-      >
-        {copied ? 'Copied ✓' : 'Copy Address'}
-      </button>
-    </div>
+        <Button
+          fullWidth
+          variant="contained"
+          color="success"
+          sx={{ mt: 3 }}
+          onClick={copyToClipboard}
+        >
+          {copied ? 'Copied ✓' : 'Copy Address'}
+        </Button>
+
+        <Snackbar
+          open={copied}
+          autoHideDuration={1500}
+          message="Wallet address copied!"
+        />
+      </CardContent>
+    </Card>
   );
 }

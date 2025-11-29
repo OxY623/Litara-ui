@@ -17,7 +17,7 @@ const cache = new InMemoryCache({
 
 // link с динамическим токеном
 const httpLink = new HttpLink({
-  uri: import.meta.env.VITE_API_URL || 'https://litara.onrender.com/api',
+  uri: 'https://litara.onrender.com/api',
   headers: {
     'Content-Type': 'application/json',
     Authorization: localStorage.getItem('token')

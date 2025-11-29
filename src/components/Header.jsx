@@ -59,6 +59,8 @@ function Header() {
               color="inherit"
               onClick={() => {
                 localStorage.removeItem('token');
+                client.cache.evict({ fieldName: 'isLoggedIn' });
+                client.cache.gc(); // garbage collection, чтобы Apollo увидел изменения
                 navigate('/');
               }}
             >

@@ -18,3 +18,8 @@ If you are developing a production application, we recommend using TypeScript wi
 # OraNote
 
 Vite + React+ Apollo + MUI + Tailwind
+
+OraNote — это приложение типа CRUD («создание, чтение, из-
+менение и удаление»). Авторизованный пользователь сможет создавать и читать
+заметки, редактировать их содержимое, изменять статус на «Избранное», ну
+и, конечно же, удалять.

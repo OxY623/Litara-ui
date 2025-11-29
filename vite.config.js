@@ -6,9 +6,9 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
     // Папка для итоговой сборки
-    outDir: 'build',
+    // outDir: 'build',
     // Папка для ассетов внутри outDir
-    assetsDir: 'static',
+    // assetsDir: 'static',
     // Минификация через terser (чуть медленнее, но гибче)
     minify: 'terser',
     // Целевая версия JS
